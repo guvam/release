@@ -1,0 +1,1 @@
+Guvam Editor distributables repo
