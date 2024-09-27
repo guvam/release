@@ -1,0 +1,32 @@
+name: Send Artifacts
+
+on:
+  workflow_dispatch
+
+jobs:
+  send-request:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: get-release
+        id: get-release
+        uses: cardinalby/git-get-release-action@1.2.4
+        env:
+          GITHUB_TOKEN: ${{secrets.RELEASE_ACTION }}
+        with:
+          latest: true
+          
+      - name: check
+        run: echo "${{steps.get-release.outputs.tag_name}}"
+
+
+      # - name: send-request
+      #   uses: fjogeleit/http-request-action@v1.16.2
+      #   with:
+      #     url: 'http://127.0.0.1:3002/api/artifacts/update'
+      #     method: 'POST'
+      #     customHeaders: '{"Content-Type: "application/json"}'
+      #     data: '{"secret":"${{secrets.GUVAM_API}}", "assets":${{steps.get-release.outputs.assets}}, "version":"${{steps.get-release.outputs.tag_name}}"}'
