@@ -23,10 +23,10 @@ jobs:
         run: echo "${{steps.get-release.outputs.tag_name}}"
 
 
-      # - name: send-request
-      #   uses: fjogeleit/http-request-action@v1.16.2
-      #   with:
-      #     url: 'http://127.0.0.1:3002/api/artifacts/update'
-      #     method: 'POST'
-      #     customHeaders: '{"Content-Type: "application/json"}'
-      #     data: '{"secret":"${{secrets.GUVAM_API}}", "assets":${{steps.get-release.outputs.assets}}, "version":"${{steps.get-release.outputs.tag_name}}"}'
+      - name: send-request
+        uses: fjogeleit/http-request-action@v1.16.2
+        with:
+          url: 'http://guvam.com/api/artifacts/update'
+          method: 'POST'
+          customHeaders: '{"Content-Type: "application/json"}'
+          data: '{"secret":"${{secrets.GUVAM_API}}", "assets":${{steps.get-release.outputs.assets}}, "version":"${{steps.get-release.outputs.tag_name}}"}'
