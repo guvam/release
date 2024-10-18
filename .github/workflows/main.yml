@@ -26,7 +26,7 @@ jobs:
       - name: send-request
         uses: fjogeleit/http-request-action@v1.16.2
         with:
-          url: 'http://guvam.com/api/artifacts/update'
+          url: 'https://guvam.com/api/artifacts/update'
           method: 'POST'
           customHeaders: '{"Content-Type": "application/json"}'
           data: '{"secret":"${{secrets.GUVAM_API}}", "assets":${{steps.get-release.outputs.assets}}, "version":"${{steps.get-release.outputs.tag_name}}"}'
